@@ -1,94 +1,38 @@
 package race.strat;
-import java.util.Scanner;
+
+/*
+ * File Name: Circuit.java
+ * Description: This class contains circuit characteristics and works in conjunction with the CircuitFactory and CircuitBuilder.
+ * This class originally had several switch statements and clunky code before the Factory and Builder Patterns were applied
+ *
+ */
+
 public class Circuit {
+    private final String trackLength;
+    private final String trackAsphalt;
+    private final String trackLayout;
+    private final String trackDownforce;
 
-    String [] tracks = {"Bahrain", "Monaco", "Singapore", "Belgium", "Spain", "Zandvoort", "Las Vegas", "Brazil"};
-
-    String [] length = {"Short", "Intermediate", "Long"};
-    String [] layout = {"Low Deg", "Medium Deg", "High Deg"};
-
-    String [] asphalt = {"Smooth", "Abrasive"};
-
-
-    String [] downforce = {"Low Downforce", "Medium Downforce", "High Downforce"};
-
-    String trackLength;
-    String trackAsphalt;
-    String trackLayout;
-    String trackDownforce;
-
-    Circuit() {
-
-        System.out.println("Circuit: Track characteristics (layout, nature, length, altitude, asphalt)/temperature/evolution.\n");
+    public Circuit(String trackLength, String trackAsphalt, String trackLayout, String trackDownforce) {
+        this.trackLength = trackLength;
+        this.trackAsphalt = trackAsphalt;
+        this.trackLayout = trackLayout;
+        this.trackDownforce = trackDownforce;
     }
 
-    public void characteristics () {
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.println("\nPlease choose a race track: " +
-                    "Bahrain, Monaco, Singapore, Belgium, Spain, Zandvoort, Las Vegas, Brazil");
-            String circuit = scanner.nextLine();
-
-            switch (circuit) {
-                case "Bahrain":
-                    trackLength = length[1];
-                    trackLayout = layout[2];
-                    trackAsphalt = asphalt[1];
-                    trackDownforce = downforce[1];
-                    break;
-                case "Monaco":
-                    trackLength = length[0];
-                    trackLayout = layout[0];
-                    trackAsphalt = asphalt[1];
-                    trackDownforce = downforce[2];
-                    break;
-                case "Singapore":
-                    trackLength = length[2];
-                    trackLayout = layout[1];
-                    trackAsphalt = asphalt[1];
-                    trackDownforce = downforce[2];
-                    break;
-                case "Belgium":
-                    trackLength = length[2];
-                    trackLayout = layout[2];
-                    trackAsphalt = asphalt[0];
-                    trackDownforce = downforce[0];
-                    break;
-                case "Spain":
-                    trackLength = length[1];
-                    trackLayout = layout[2];
-                    trackAsphalt = asphalt[0];
-                    trackDownforce = downforce[1];
-                    break;
-                case "Zandvoort":
-                    trackLength = length[0];
-                    trackLayout = layout[1];
-                    trackAsphalt = asphalt[0];
-                    trackDownforce = downforce[2];
-                    break;
-                case "Las Vegas":
-                    trackLength = length[2];
-                    trackLayout = layout[1];
-                    trackAsphalt = asphalt[0];
-                    trackDownforce = downforce[0];
-                    break;
-                case "Brazil":
-                    trackLength = length[1];
-                    trackLayout = layout[2];
-                    trackAsphalt = asphalt[1];
-                    trackDownforce = downforce[2];
-                    break;
-
-            }
-
-        System.out.println("Track details:\n" +
-                "Track: " + circuit + "\n" +
-                "Length: " + trackLength + "\n" +
-                "Layout: " + trackLayout + "\n" +
-                "Asphalt: " + trackAsphalt + "\n" +
-                "Preferred Setup: " + trackDownforce + "\n");
-        }
+    public String getTrackLength() {
+        return trackLength;
     }
 
+    public String getTrackAsphalt() {
+        return trackAsphalt;
+    }
 
+    public String getTrackLayout() {
+        return trackLayout;
+    }
 
+    public String getTrackDownforce() {
+        return trackDownforce;
+    }
+}
