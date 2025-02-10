@@ -8,7 +8,9 @@ package race.strat;
  * The purpose of using the singleton pattern was to avoid a new creation of the degradation value (an issue that existed
  * before i applied the singleton pattern)
  *
- * The degradation value is randomly generated once when the program is run
+ * The degradation value is randomly generated once when the program is run.
+ *
+ * In future, I could potentiall model a second degradation that gets implemented to the new tyre compound after the pitstop
  *
  */
 

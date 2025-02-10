@@ -17,6 +17,31 @@ Given that I do not have any exposure to the tools and software that Motorsports
 
 The purpose of this tool is simply to demonstrate my understanding of racing dynamics as a Motorsports enthusiast since the age of 12 and the Software Development skills that go along with it, as I seek employment within the industry and wish to learn from some of the best minds in the world.
 
+# How To Run
+
+Download the project on to your computer. Open the file in your IDE of choice
+You would need to include the External Libraries "commons-csv-1.10.0" or any later version of CSV processor JAR file.
+So long as you have External Libraries added to the build of this project that allow you to process csv files,
+it should run smoothly.
+
+To manually add JAR files:
+
+Download the JAR file (link: https://commons.apache.org/proper/commons-csv/download_csv.cgi).
+After opening the project in IntelliJ, go to File → Project Structure.
+Select 'Modules' from the left panel.
+Click the 'Dependencies' tab → Click "+" → Select "JARs or directories".
+Locate and select the downloaded JAR file from your computer.
+Click OK and Apply changes.
+This should equip the project with the csv processor JAR file on your computer.
+
+Furthermore, ensure that the csv file: "Lap_Times.csv" and audio file: "F1V10.wav" have also downloaded
+and are present in the project folder when you have opened the project in the IDE of your choice.
+
+Upon running, there should not be any errors that indicate any external libraries are missing, or that any file is missing
+
+You should hear an F1 car sound once you run the project.
+
+The project runs entirely in the console as text at the moment, I do wish to include a GUI in future.
 
 # Software Design Patterns
 
@@ -63,15 +88,10 @@ Can possibly use a system to measure time, memory and energy usage (later).
 
 This is currently a base model of a Race Strategy Simulator. In future, I can implement a more comprehensive model for the tyres, current tyres, individual tyre degradation, dynamic pitstop lap generation etc.
 
-I will also include a GUI for this program in due course.
+Since this was a personal project developed during my intense Master's Program, I may also include a GUI for this program in future.
 
 # Code Maintainability, Readability and Reusability
 
 Code should be loosely coupled. Should be able to demonstrate the addition of code/variables, reuse older code (such as reader),
 The code should be well segmented, naming conventions. Minimize smells.
-
-# Implementation
-
-Talk about the code here once it is complete. 
-I will expand on this segment in due course
 

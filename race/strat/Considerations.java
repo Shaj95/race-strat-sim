@@ -7,12 +7,17 @@ package race.strat;
  * File Name: Considerations.java
  * Description: This class contains all kinds of miscellaneous considerations that are involved in Race Strategy
  *
- * There can be even more coniditions added such as "expected traffic", "expected rejoin position"
+ * There can be even more conditions added such as "expected traffic", "expected rejoin position"
  *
  * For now i kept it to some critical and interesting elements
  *
  * It passes the pit lane time loss and probability of virtual safety car to the strategy pattern for determining race strategies
  * It determines a random (reasonable) amount of pit lane time loss
+ *
+ * For now, there is a fixed target lap and pit stop lap due to the fact that i have to move to various other projects
+ *
+ * In future, there can be a more nuanced decision making based on various conditionals to determine the pitstop lap
+ * which can be determined by a simple algorithm.
  */
 
 import java.util.Random;

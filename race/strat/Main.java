@@ -27,8 +27,8 @@ public class Main {
 
         System.out.println("Welcome to the Race Strategy Simulator App\n");
 
-        DataProcessor dataProcessor = new DataProcessor();
-        Weather weather = new Weather();
+        // Circuit information created here
+        // In the GUI, this would be a drop-down selection of multiple circuits instead of a hard-coded input here
         CircuitFactory circuitFactory = new CircuitFactory();
 
         Circuit monacoCircuit = circuitFactory.createCircuit("Monaco");
@@ -38,57 +38,61 @@ public class Main {
         System.out.println("Asphalt: " + monacoCircuit.getTrackAsphalt());
         System.out.println("Preferred Setup: " + monacoCircuit.getTrackDownforce());
 
-        //Circuit circuit = new Circuit();
-        Considerations considerations = new Considerations();
-        GenerateLaps generateLaps = new GenerateLaps();
+        // Weather System
+        Weather weather = new Weather();
         String currentWeather = weather.getCurrentWeather();
-
-        int pitLaneTimeLoss = considerations.getPitLaneTimeLoss();
-        int virtualSafetyCarChance = considerations.getVirtualSafetyCarChance();
-
-        //String circuitName = circuit.characteristics();
-        System.out.println("The pitlane time loss for this track is " + considerations.getPitLaneTimeLoss() + "s");
         weather.currentWeather();
         weather.chanceOfRain();
+
+        // Tyre Info
         Tyres tyres = new Tyres();
         tyres.warmUp();
         tyres.weekendAllocation();
+
+        // calls the data processor class which reads lap 1 data from a csv file and populates lists of each data that can be used
+        DataProcessor dataProcessor = new DataProcessor();
+
+        // Pit lane and other consideration in strategic calls
+        Considerations considerations = new Considerations();
+        int pitLaneTimeLoss = considerations.getPitLaneTimeLoss();
+        int virtualSafetyCarChance = considerations.getVirtualSafetyCarChance();
+        System.out.println("The pitlane time loss for this track is " + considerations.getPitLaneTimeLoss() + "s");
+
+        // Executing the strategy models
+        // These are currently basic conditionals, but they can be enhanced to take more nuanced information
         String currentCompound = tyres.getCurrentCompound();
-        // Strategies strategies = new Strategies(currentWeather, currentCompound, pitLaneTimeLoss, virtualSafetyCarChance, "Bahrain");
         Strategy targetLapStrategy = new TargetLapStrategy(currentCompound);
         Strategy pitStopLapStrategy = new PitStopLapStrategy(currentCompound, pitLaneTimeLoss, virtualSafetyCarChance);
         Strategy startingCompoundStrategy = new StartingCompoundStrategy(currentWeather, currentCompound, "Monaco");
         startingCompoundStrategy.execute();
         targetLapStrategy.execute();
-        // pitStopLapStrategy.execute();
 
-        //strategies.startingCompound();
-
-        Degradation degradation = Degradation.getInstance();
-        //strategies.targetLap();
-
-        System.out.println("The expected laptime degradation is: " + degradation.getTyreDeg() + "s per lap");
+        // Calls the generate laps class which utilizes the lists populated by Data Processor
+        // and generates subsequent laps based on Degradation
+        GenerateLaps generateLaps = new GenerateLaps();
 
         System.out.println("\nWaiting for lap to complete...");
-        Thread.sleep(10000); // 10 second delay
+        Thread.sleep(10000); // 10 second delay to simulate lap 1 completion
 
         System.out.println("Lap 1");
         dataProcessor.lapTimes();
 
         // this for loop executes the laptimes and degradation for 7 laps
+        // it starts at lap 2 which is the first of the generated laps based on degradation
+        // the lap counter can be increased to 56 laps for a full race distance
         for (int lapCounter = 2; lapCounter <= 7; lapCounter++) {
 
-            Thread.sleep(5000); // 5 second delay
+            Thread.sleep(5000); // 5 second delay to simulate waiting for each lap to complete
             System.out.println("\nWaiting for lap to complete...");
             System.out.println("\nLap " + lapCounter + ":");
             generateLaps.generateAndProcessLapTimes(dataProcessor.getLapTimesList(), dataProcessor.getDriverNamesList(), dataProcessor.getCurrentTyreList());
         }
 
+        // Safety Cars and other interruptions
         considerations.chanceOfSafetyCar();
         System.out.println("The likelihood of there being a virtual safety car is " + considerations.getVirtualSafetyCarChance() + "%");
         considerations.chanceOfRedFlag();
         pitStopLapStrategy.execute();
-        // strategies.pitStopLap();
 
     }
 }

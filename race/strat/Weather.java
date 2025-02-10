@@ -8,6 +8,7 @@ package race.strat;
  * There are many switch statements in this but i did not feel the need to use a design pattern here
  * since this is as far as it gets with the weather system.
  *
+ * I can later give a more nuanced decision-making system that also includes the Dry to Wet and Wet to Dry systems
  */
 
 import java.util.Random;
